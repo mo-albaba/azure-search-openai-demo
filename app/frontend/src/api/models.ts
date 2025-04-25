@@ -22,6 +22,8 @@ export type ChatAppRequestOverrides = {
     retrieval_mode?: RetrievalMode;
     semantic_ranker?: boolean;
     semantic_captions?: boolean;
+    query_rewriting?: boolean;
+    reasoning_effort?: string;
     include_category?: string;
     exclude_category?: string;
     seed?: number;
@@ -49,7 +51,7 @@ export type ResponseMessage = {
 export type Thoughts = {
     title: string;
     description: any; // It can be any output from the api
-    props?: { [key: string]: string };
+    props?: { [key: string]: any };
 };
 
 export type ResponseContext = {
@@ -91,8 +93,12 @@ export type ChatAppRequest = {
 };
 
 export type Config = {
+    defaultReasoningEffort: string;
     showGPT4VOptions: boolean;
     showSemanticRankerOption: boolean;
+    showQueryRewritingOption: boolean;
+    showReasoningEffortOption: boolean;
+    streamingEnabled: boolean;
     showVectorOption: boolean;
     showUserUpload: boolean;
     showLanguagePicker: boolean;
@@ -116,7 +122,7 @@ export interface SpeechConfig {
 }
 
 export type HistoryListApiResponse = {
-    items: {
+    sessions: {
         id: string;
         entra_oid: string;
         title: string;
@@ -125,12 +131,10 @@ export type HistoryListApiResponse = {
     continuation_token?: string;
 };
 
-export type HistroyApiResponse = {
+export type HistoryApiResponse = {
     id: string;
     entra_oid: string;
-    title: string;
     answers: any;
-    timestamp: number;
 };
 
 export interface AppConfig {
